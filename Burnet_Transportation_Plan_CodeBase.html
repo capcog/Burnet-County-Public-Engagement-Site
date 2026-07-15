@@ -392,6 +392,31 @@
     font-size: 0.85rem;
     font-family: 'IBM Plex Mono', monospace;
   }
+  .contact-btn{
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 90;
+    background: var(--accent);
+    color: #1B2A2F;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 13px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    transition: transform 0.15s ease;
+  }
+  .contact-btn:hover{ transform: translateY(-2px); }
+  .contact-btn:focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; }
+
+  .contact-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 18,
 </style>
 </head>
 <body>
@@ -526,7 +551,39 @@ Your feedback will guide which projects should be prioritized, and help identify
     <div class="survey-card">
       <div class="survey-frame-wrap">
         <!--
-          SURVEY EMBED.
+        <button class="contact-btn" id="contactOpenBtn" aria-haspopup="dialog">Contact</button>
+
+<div class="contact-overlay" id="contactOverlay">
+  <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <button class="contact-close" id="contactCloseBtn" aria-label="Close contact info">✕</button>
+    <h3 id="contactModalTitle">Contact Us</h3>
+    <p class="hint">Have a question about the transportation plan update, or something you'd like us to know? Reach out directly.</p>
+    <p class="contact-email-line">
+      <a href="mailto:ptorres@capcog.org">ptorres@capcog.org</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const openBtn = document.getElementById('contactOpenBtn');
+    const closeBtn = document.getElementById('contactCloseBtn');
+    const overlay = document.getElementById('contactOverlay');
+
+    function open(){ overlay.classList.add('open'); }
+    function close(){ overlay.classList.remove('open'); }
+
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function(e){
+      if (e.target === overlay) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') close();
+    });
+  })();
+</script> 
+        SURVEY EMBED.
           Google Forms: open your form → click "Send" → the <> (embed HTML) tab
           → copy the src URL from the iframe it gives you → paste below.
           Typeform: use your form's public URL as the src, e.g.
