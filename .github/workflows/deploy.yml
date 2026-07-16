@@ -1,0 +1,46 @@
+# GitHub Actions workflow: Deploy static site to S3 + CloudFront
+# Place this file at: .github/workflows/deploy.yml in your repository
+#
+# Required GitHub Secrets:
+#   AWS_ACCESS_KEY_ID      - IAM user access key with S3 and CloudFront permissions
+#   AWS_SECRET_ACCESS_KEY  - Corresponding secret key
+#   CLOUDFRONT_DISTRIBUTION_ID - The CloudFront distribution ID (from provision script output)
+
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    name: Sync to S3 and invalidate cache
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Sync site files to S3
+        run: |
+          aws s3 sync . s3://burnet-county-plan-outreach \
+            --delete \
+            --cache-control "public, max-age=86400" \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "*.ps1" \
+            --exclude "README*"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
