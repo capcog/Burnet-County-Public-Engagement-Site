@@ -263,6 +263,7 @@
     border-radius: var(--radius);
     padding: 20px;
   }
+  .pdf-card + .pdf-card{ margin-top: 20px; }
   .pdf-frame-wrap{
     border-radius: 8px;
     overflow: hidden;
@@ -392,6 +393,79 @@
     font-size: 0.85rem;
     font-family: 'IBM Plex Mono', monospace;
   }
+  .contact-btn{
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 90;
+    background: var(--accent);
+    color: #1B2A2F;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 13px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    transition: transform 0.15s ease;
+  }
+  .contact-btn:hover{ transform: translateY(-2px); }
+  .contact-btn:focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; }
+
+  .contact-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 18, 20, 0.75);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .contact-overlay.open{ display: flex; }
+
+  .contact-modal{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+  }
+  .contact-modal h3{ font-size: 1.3rem; margin-bottom: 6px; }
+  .contact-modal p.hint{
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin: 0 0 18px 0;
+  }
+  .contact-close{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .contact-close:hover{ color: var(--text); }
+
+  .contact-email-line{
+    margin: 0;
+    padding-top: 4px;
+    border-top: 1px solid var(--line);
+  }
+  .contact-email-line a{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .contact-email-line a:hover{ text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -489,6 +563,16 @@ Your feedback will guide which projects should be prioritized, and help identify
         <a href="Project_List.pdf" download>Download PDF ↓</a>
       </div>
     </div>
+
+    <div class="pdf-card">
+      <div class="pdf-frame-wrap">
+        <iframe src="Burnet-County-SAP-2025-08-15.pdf" title="Burnet County Safety Action Plan"></iframe>
+      </div>
+      <div class="map-caption">
+        <span>Burnet County Safety Action Plan</span>
+        <a href="Burnet-County-SAP-2025-08-15.pdf" download>Download PDF ↓</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -551,6 +635,39 @@ Your feedback will guide which projects should be prioritized, and help identify
   <div class="wrap">
   </div>
 </footer>
+
+<button class="contact-btn" id="contactOpenBtn" aria-haspopup="dialog">Contact</button>
+
+<div class="contact-overlay" id="contactOverlay">
+  <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <button class="contact-close" id="contactCloseBtn" aria-label="Close contact info">✕</button>
+    <h3 id="contactModalTitle">Contact Us</h3>
+    <p class="hint">Have a question about the transportation plan update, or something you'd like us to know? Reach out directly.</p>
+    <p class="contact-email-line">
+      <a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const openBtn = document.getElementById('contactOpenBtn');
+    const closeBtn = document.getElementById('contactCloseBtn');
+    const overlay = document.getElementById('contactOverlay');
+
+    function open(){ overlay.classList.add('open'); }
+    function close(){ overlay.classList.remove('open'); }
+
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function(e){
+      if (e.target === overlay) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') close();
+    });
+  })();
+</script>
 
 <script>
   // ============================================================
