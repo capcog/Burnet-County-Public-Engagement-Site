@@ -472,12 +472,12 @@
 
 <header class="hero">
   <div class="wrap hero-inner">
-    <span class="eyebrow">Burnet County · Community Input Open Now</span>
+    <span class="eyebrow">Burnet County · Community Input Period Closed</span>
     <h1>Help shape the county's transportation plan.</h1>
     <p class="lede">We are updating the Transportation Plan for Burnet County through 2050. The update will include a thoroughfare plan and a list of priority projects based on recent local studies and community input.
 
-Your feedback will guide which projects should be prioritized, and help identify any additional locations of need.</p>
-    <a class="btn" href="#survey">Start the survey →</a>
+The public comment period has now closed. Thank you to everyone who shared feedback — it will help guide which projects are prioritized.</p>
+    <a class="btn" href="#comment-closed">Learn more →</a>
   </div>
   <svg class="hero-route" viewBox="0 0 260 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M10 200 C 60 180, 40 120, 90 110 S 150 40, 210 30" stroke="#E8A33D" stroke-width="2" stroke-dasharray="1 10" stroke-linecap="round"/>
@@ -585,63 +585,23 @@ Your feedback will guide which projects should be prioritized, and help identify
 <section id="corridor-agreement">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">TxDOT Corridor Agreement Information</span>
+      <span class="eyebrow">Key Information</span>
       <h2>County Corridor Agreement Program</h2>
     </div>
     <div class="info-box">
-      <p> Section 201.619 of the Texas Transportation Code allows TxDOT and a county to enter into an agreement that identifies future transportation corridors within the county in accordance with this subsection. The corridors identified in the agreement must be derived from existing transportation plans adopted by the department or commission, the county, or a metropolitan planning organization.</p>
-      <p style="margin-top: 14px;">County Corridor Agreements keep property owners, developers, and the general public informed of future transportation plans, allowing for educated development decisions. They also give a county the flexibility to require certain planned transportation corridors to be shown on subdivision plats. <p>
-      <p style="margin-top: 14px;">Entering into a Corridor Agreement will be considered by Burnet County Commissioners along with the adoption of this plan.</p>
-    </div>
-         <p>More information can be found at this TxDOT website: <a href="https://www.txdot.gov/about/programs/county-corridor-agreement.html" target="_blank" rel="noopener">County Corridor Agreement Program</a></p>
-</div>
-</section>
-
-<section id="pinmap">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Point it out</span>
-      <h2>Drop a pin where a project is needed</h2>
-      <p>Click anywhere on the map to mark a specific intersection or stretch of road, then describe any issues or needed changes. When you click "Save pin", the location and your comments will be sent to the planning team. Add as many pins as you want. You will only be able to view the pins you add in the current session. Even though you will not see your added pins when you come back to the site after leaving it, your pins have already been sent to the team and you may add more pins at any time.</p>
-    </div>
-    <div class="pin-card">
-      <div class="pin-instructions">
-        <span class="dot"></span>
-        <span>Click the map to add a pin. Existing pins are shown in amber — click one to read it.</span>
-      </div>
-      <div id="pinMap"></div>
-      <p class="pin-status" id="pinStatus"></p>
+      <p>The department and a county may enter into an agreement that identifies future transportation corridors within the county in accordance with this subsection. The corridors identified in the agreement must be derived from existing transportation plans adopted by the department or commission, the county, or a metropolitan planning organization.</p>
+      <p style="margin-top: 14px;">This Corridor Agreement is part of the Burnet Transportation Planning Process and will be considered along with the adoption of this plan.</p>
     </div>
   </div>
+         <p>More information can be found at this TxDOT website: <a href="https://www.txdot.gov/about/programs/county-corridor-agreement.html" target="_blank" rel="noopener">County Corridor Agreement Program</a></p>
 </section>
 
-<section id="survey">
+<section id="comment-closed">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Your turn</span>
-      <h2>Share your input</h2>
-      <p>Tell us what you think of the draft projects or areas of additonal need.</p>
-    </div>
-    <div class="survey-card">
-      <div class="survey-frame-wrap">
-        <!--
-          SURVEY EMBED.
-          Google Forms: open your form → click "Send" → the <> (embed HTML) tab
-          → copy the src URL from the iframe it gives you → paste below.
-          Typeform: use your form's public URL as the src, e.g.
-          https://yourname.typeform.com/to/AbCd1234 — Typeform's own
-          embed script (embed.typeform.com/next/embed.js) also works if
-          you prefer a popup/slider style instead of an inline iframe.
-        -->
-        <iframe
-          src="https://forms.zohopublic.com/csimon/form/BurnetCountyTransportationPlanStakeholderFeedback1/formperma/hkKYR6tExoywQQlgIPzqvj271yO4b0NW-CCMWyxoWsw"
-          title="Community survey">
-          <p class="survey-fallback">
-            Your browser can't display the embedded form.
-            <a href="https://forms.google.com" target="_blank" rel="noopener">Open the survey in a new tab</a> instead.
-          </p>
-        </iframe>
-      </div>
+      <span class="eyebrow">Thank you</span>
+      <h2>The public comment period has closed</h2>
+      <p>Thank you to everyone who dropped a pin, filled out the survey, or otherwise shared feedback on the draft transportation plan. The planning team is now reviewing all submissions, and that input will help shape the next draft of the plan. Check back here for updates as the process continues.</p>
     </div>
   </div>
 </section>
@@ -681,127 +641,6 @@ Your feedback will guide which projects should be prioritized, and help identify
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape') close();
     });
-  })();
-</script>
-
-<script>
-  // ============================================================
-  // PIN MAP CONFIG
-  // Paste your Google Apps Script Web App URL here once deployed.
-  // See PIN_MAP_SETUP.md for the full walkthrough.
-  // ============================================================
-  const PIN_API_URL = "https://script.google.com/macros/s/AKfycbxEiSCepnfKUW1isjbOeBRPeHRu9o1omoidV0bFtuZ2Z2-gUooRLy4DKb5zhCEb6ketfQ/exec";
-
-  (function(){
-    const statusEl = document.getElementById('pinStatus');
-
-    function setStatus(msg, type){
-      statusEl.textContent = msg;
-      statusEl.className = 'pin-status' + (type ? ' ' + type : '');
-    }
-
-    function isConfigured(url){
-      return url && url.indexOf('PASTE_YOUR') !== 0;
-    }
-
-    if (!isConfigured(PIN_API_URL)){
-      setStatus('Pin saving isn\'t connected yet — see setup instructions to link a Google Sheet.', 'error');
-    }
-
-    // Initial view: centered roughly over Burnet County, TX
-    const map = L.map('pinMap').setView([30.75, -98.25], 10);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-      maxZoom: 19
-    }).addTo(map);
-
-    const pinIcon = L.divIcon({
-      className: 'custom-pin',
-      html: '<div style="width:16px;height:16px;border-radius:50% 50% 50% 0;background:#E8A33D;border:2px solid #1B2A2F;transform:rotate(-45deg);"></div>',
-      iconSize: [16, 16],
-      iconAnchor: [8, 16]
-    });
-
-    function popupFormHTML(){
-      return '<div class="pin-form">' +
-        '<textarea placeholder="What project is needed here? (e.g. add a turn lane, fix this intersection, install lighting)"></textarea>' +
-        '<div class="pin-form-actions">' +
-          '<button type="button" class="cancel">Cancel</button>' +
-          '<button type="button" class="primary submit">Save pin</button>' +
-        '</div>' +
-      '</div>';
-    }
-
-    function attachNewPinPopup(marker, latlng){
-      marker.bindPopup(popupFormHTML(), { closeButton: true, minWidth: 220 }).openPopup();
-
-      marker.on('popupopen', function(e){
-        const el = e.popup.getElement();
-        const textarea = el.querySelector('textarea');
-        const cancelBtn = el.querySelector('.cancel');
-        const submitBtn = el.querySelector('.submit');
-        textarea.focus();
-
-        cancelBtn.addEventListener('click', function(){
-          map.removeLayer(marker);
-        });
-
-        submitBtn.addEventListener('click', function(){
-          const description = textarea.value.trim();
-          if (!description){
-            textarea.focus();
-            return;
-          }
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Saving…';
-          savePin(latlng.lat, latlng.lng, description)
-            .then(function(){
-              marker.unbindPopup();
-              marker.bindPopup(describePin(description, new Date()));
-              setStatus('Pin saved. Thank you.', 'success');
-            })
-            .catch(function(err){
-              setStatus('Could not save that pin — check your connection and try again.', 'error');
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Save pin';
-            });
-        });
-      });
-
-      marker.on('remove', function(){});
-    }
-
-    function describePin(description, timestamp){
-      const dateStr = timestamp ? new Date(timestamp).toLocaleDateString() : '';
-      const safe = document.createElement('div');
-      safe.textContent = description;
-      return '<div style="max-width:220px;"><div style="font-size:0.9rem;margin-bottom:6px;">' +
-        safe.innerHTML + '</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.72rem;color:#9FB4B8;">' +
-        dateStr + '</div></div>';
-    }
-
-    // Click map to add a new pin
-    map.on('click', function(e){
-      const marker = L.marker(e.latlng, { icon: pinIcon }).addTo(map);
-      attachNewPinPopup(marker, e.latlng);
-    });
-
-    // Save a pin to the Google Sheet backend
-    function savePin(lat, lng, description){
-      if (!isConfigured(PIN_API_URL)){
-        return Promise.reject(new Error('API not configured'));
-      }
-      return fetch(PIN_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight
-        body: JSON.stringify({ lat: lat, lng: lng, description: description })
-      }).then(function(res){
-        if (!res.ok) throw new Error('Request failed');
-        return res.json();
-      });
-    }
-
-    
   })();
 </script>
 
