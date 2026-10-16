@@ -184,78 +184,6 @@
   }
   .map-caption strong{ color: var(--text); font-weight: 500; }
 
-  /* ---------- Image gallery ---------- */
-  .gallery-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 32px;
-  }
-  @media (max-width: 780px){ .gallery-grid{ grid-template-columns: 1fr; } }
-
-  .gallery-item{
-    margin: 0;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .gallery-btn{
-    display: block;
-    width: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: zoom-in;
-  }
-  .gallery-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: -2px; }
-  .gallery-item img{
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.2s ease;
-  }
-  .gallery-btn:hover img{ transform: scale(1.03); }
-  .gallery-item figcaption{
-    padding: 14px 16px;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  /* ---------- Lightbox ---------- */
-  .lightbox{
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 18, 20, 0.92);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-  }
-  .lightbox.open{ display: flex; }
-  .lightbox img{
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  }
-  .lightbox-close{
-    position: absolute;
-    top: 20px;
-    right: 24px;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--line);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.1rem;
-    cursor: pointer;
-  }
-  .lightbox-close:focus-visible{ outline: 2px solid var(--accent); }
-
   /* ---------- PDF viewer ---------- */
   .pdf-card{
     background: var(--surface);
@@ -472,7 +400,7 @@
 
 <header class="hero">
   <div class="wrap hero-inner">
-    <span class="eyebrow">Burnet County</span>
+    <span class="eyebrow">Burnet County ·</span>
     <h1>Burnet County Transportation Plan.</h1>
     <p class="lede">This plan includes a thoroughfare plan and a list of priority projects based on recent local studies and community input.
 
@@ -522,40 +450,7 @@ This transportation plan was formally adopted by Burnet County at the October 13
     <div class="section-head">
       <span class="eyebrow">Reference materials</span>
       <h2>Some maps of the county roads</h2>
-      <p>Draft project maps from the plan update, plus the full project list. Click any map to view it larger.</p>
-    </div>
-
-    <div class="gallery-grid">
-      <figure class="gallery-item">
-        <button class="gallery-btn" data-full="images/countywide-projects-map.jpeg" data-alt="Countywide map of all draft transportation projects, with inset maps of Burnet, Bertram, and Marble Falls">
-          <img src="images/countywide-projects-map.jpeg" alt="Countywide map of all draft transportation projects, with inset maps of Burnet, Bertram, and Marble Falls" loading="lazy">
-        </button>
-        <figcaption>Countywide map of projects — all project intersections and corridors, with inset maps of Burnet, Bertram, and Marble Falls</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <button class="gallery-btn" data-full="images/kabco-crashes-map.jpeg" data-alt="Map of KABCO-classified crashes in Burnet County from 2019 to 2023">
-          <img src="images/kabco-crashes-map.jpeg" alt="Map of KABCO-classified crashes in Burnet County from 2019 to 2023" loading="lazy">
-        </button>
-        <figcaption>KABCO crashes, 2019–2023 — all crashes shown in orange; fatal or serious-injury crashes shown in red</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <button class="gallery-btn" data-full="images/crash-heatmap.png" data-alt="Heatmap of crash density across Burnet County from 2013 to 2024">
-          <img src="images/crash-heatmap.png" alt="Heatmap of crash density across Burnet County from 2013 to 2024" loading="lazy">
-        </button>
-        <figcaption>Moving Central Texas crash analytics heatmap — crash occurrences collected from 2013–2024</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <button class="gallery-btn" data-full="images/thoroughfares-map.jpeg" data-alt="Draft map of major thoroughfares by roadway type">
-          <img src="images/thoroughfares-map.jpeg" alt="Draft map of major thoroughfares by roadway type" loading="lazy">
-        </button>
-        <figcaption>Draft map of major thoroughfares, by roadway type</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <button class="gallery-btn" data-full="images/arterial-network-map.jpeg" data-alt="Existing arterial network map based on TxDOT functional classification">
-          <img src="images/arterial-network-map.jpeg" alt="Existing arterial network map based on TxDOT functional classification" loading="lazy">
-        </button>
-        <figcaption>Existing arterial network — created using TxDOT functional classification</figcaption>
-      </figure>
+      <p>The full draft project list is available below.</p>
     </div>
 
     <div class="pdf-card">
@@ -579,12 +474,6 @@ This transportation plan was formally adopted by Burnet County at the October 13
     </div>
   </div>
 </section>
-
-<!-- Lightbox for enlarging gallery maps -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close enlarged image">✕</button>
-  <img id="lightboxImg" src="" alt="">
-</div>
 
 <section id="corridor-agreement">
   <div class="wrap">
@@ -645,34 +534,6 @@ This transportation plan was formally adopted by Burnet County at the October 13
     });
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape') close();
-    });
-  })();
-</script>
-
-<script>
-  (function(){
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const closeBtn = document.getElementById('lightboxClose');
-
-    document.querySelectorAll('.gallery-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        lightboxImg.src = btn.getAttribute('data-full');
-        lightboxImg.alt = btn.getAttribute('data-alt') || '';
-        lightbox.classList.add('open');
-      });
-    });
-
-    function closeLightbox(){
-      lightbox.classList.remove('open');
-      lightboxImg.src = '';
-    }
-    closeBtn.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', function(e){
-      if (e.target === lightbox) closeLightbox();
-    });
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape') closeLightbox();
     });
   })();
 </script>
